@@ -8,9 +8,10 @@ ENV GO111MODULE on
 
 RUN  \
      apk add --no-cache git && \
-     git clone https://github.com/minio/minio && cd minio && \
-     go install -v -ldflags "$(go run buildscripts/gen-ldflags.go)" && \
+     git clone https://github.com/lutostag/minio && cd minio && \
+     go install -v -ldflags "$(./buildscripts/gen-ldflags.sh)" && \
      cd dockerscripts; go build -ldflags "-s -w" -o /usr/bin/healthcheck healthcheck.go
+
 
 FROM alpine:3.9
 
